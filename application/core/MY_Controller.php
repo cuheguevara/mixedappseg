@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
     $this->language = (isset($this->language) ? $this->language : 'english');
     $this->language_id = $this->language == "indonesia" ? "id" : "en";
     $this->lang->load('site', $this->language);
-
+    $this->data['PAGE_TITLE'] = 'Welcome in Mixed Script';
   }
 
  function _make_captcha() {
