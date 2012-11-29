@@ -1,4 +1,6 @@
 /nbproject/*
+/assets/*
+/system/*
 /application/config/database.php
 /application/config/config.php
 /application/config/routes.php
