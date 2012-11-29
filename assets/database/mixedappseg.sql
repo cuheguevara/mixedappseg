@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 192.168.20.38_3306
+Source Server         : LOCALHOST
 Source Server Version : 50516
 Source Host           : localhost:3306
 Source Database       : mixedappseg
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2012-11-29 12:10:37
+Date: 2012-11-30 01:19:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,23 +26,34 @@ CREATE TABLE `ct_captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of ct_captcha
 -- ----------------------------
-INSERT INTO `ct_captcha` VALUES ('1', '1354123845', '127.0.0.1', 'dXs4P3vT');
-INSERT INTO `ct_captcha` VALUES ('2', '1354124357', '127.0.0.1', 'c9wUVYXM');
-INSERT INTO `ct_captcha` VALUES ('3', '1354124369', '127.0.0.1', 'cygXqaAC');
-INSERT INTO `ct_captcha` VALUES ('4', '1354124407', '127.0.0.1', 'm5n5mGYh');
-INSERT INTO `ct_captcha` VALUES ('5', '1354124414', '127.0.0.1', 'lYhZBfxh');
-INSERT INTO `ct_captcha` VALUES ('6', '1354124545', '127.0.0.1', '2maS7');
-INSERT INTO `ct_captcha` VALUES ('7', '1354125927', '127.0.0.1', '8LpGh');
-INSERT INTO `ct_captcha` VALUES ('8', '1354125950', '127.0.0.1', 'wDoWP');
-INSERT INTO `ct_captcha` VALUES ('9', '1354125972', '127.0.0.1', 'ECzXe');
-INSERT INTO `ct_captcha` VALUES ('10', '1354125996', '127.0.0.1', '5nkKB');
-INSERT INTO `ct_captcha` VALUES ('11', '1354126020', '127.0.0.1', 'An0Ty');
-INSERT INTO `ct_captcha` VALUES ('12', '1354126057', '127.0.0.1', 'DThjC');
-INSERT INTO `ct_captcha` VALUES ('13', '1354126069', '127.0.0.1', 'vsC7l');
-INSERT INTO `ct_captcha` VALUES ('14', '1354126083', '127.0.0.1', 'fQIST');
-INSERT INTO `ct_captcha` VALUES ('15', '1354126092', '127.0.0.1', 'WP3L2');
+INSERT INTO `ct_captcha` VALUES ('23', '1354208921', '127.0.0.1', 'UkKii');
+INSERT INTO `ct_captcha` VALUES ('24', '1354210341', '127.0.0.1', 'z7HlA');
+INSERT INTO `ct_captcha` VALUES ('25', '1354210363', '127.0.0.1', 'HiTgB');
+INSERT INTO `ct_captcha` VALUES ('26', '1354210373', '127.0.0.1', 'EYs14');
+INSERT INTO `ct_captcha` VALUES ('27', '1354210411', '127.0.0.1', '5zQLa');
+INSERT INTO `ct_captcha` VALUES ('28', '1354210433', '127.0.0.1', 'yjt5D');
+INSERT INTO `ct_captcha` VALUES ('29', '1354210449', '127.0.0.1', 'rsUa6');
+INSERT INTO `ct_captcha` VALUES ('30', '1354210461', '127.0.0.1', 'DmNiU');
+
+-- ----------------------------
+-- Table structure for `ct_guestbook`
+-- ----------------------------
+DROP TABLE IF EXISTS `ct_guestbook`;
+CREATE TABLE `ct_guestbook` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) DEFAULT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `msg` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ct_guestbook
+-- ----------------------------
+INSERT INTO `ct_guestbook` VALUES ('1', 'suhendra@citstudio.com', 'suhendra', 'alksdlaksjd\\r\\nasldkjasldkj\\r\\n');
+INSERT INTO `ct_guestbook` VALUES ('2', 'asd', 'asd', 'asd');
