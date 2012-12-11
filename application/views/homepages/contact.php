@@ -1,5 +1,5 @@
 <?php echo $msg;?><br/><br/>
-<form name="form_captcha" action="<?php echo base_url().'contact/send'?>" method="POST">
+<form name="form_captcha" action="<?php echo base_url().'contact/sendrecaptcha'?>" method="POST">
   <table>
     <tr>
       <td>Nama : </td>
@@ -17,7 +17,6 @@
       <td>&nbsp;</td>
       <td>
         <?=$captcha;?><br/>
-        <input type="text" name="captcha" id="input" class="input mid-margin-top" placeholder="Type Code from Image" />
       </td>
     </tr>
     <tr>
