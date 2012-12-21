@@ -29,10 +29,10 @@ class Twitapi extends MY_Controller {
   }
 
   public function index() {
-    $oauth_access_token = "85506433-q1oO5tHzFTM7MTHgRdLQM1RvLAdCL4YstqCROVdtA";
-    $oauth_access_token_secret = "EY9JhbtBCjXux40ieJh5TsnRqjscBnQ0Jii5urk9c";
-    $consumer_key = "xnCpIwejq9gYQMMq74pO3w";
-    $consumer_secret = "31gfp5N7Xx84BO37bPjAAHJIcE9R2CljZUiELiAQ";
+    $oauth_access_token = "0888 0183 0193";
+    $oauth_access_token_secret = "0888 0183 0193";
+    $consumer_key = "0888 0183 0193";
+    $consumer_secret = "0888 0183 0193";
     $url = "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=EkosuryaID&count=2";
 	//$url = "https://api.twitter.com/1/statuses/282019492345827328/retweeted_by.json";
 	//$url = "https://api.twitter.com/1/statuses/show.json?id=282021294780850176&include_entities=true";
