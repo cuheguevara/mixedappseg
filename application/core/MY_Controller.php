@@ -1,4 +1,7 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php
+
+if (!defined('BASEPATH'))
+  exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller {
 
@@ -18,7 +21,56 @@ class MY_Controller extends CI_Controller {
     $this->data['PAGE_TITLE'] = 'Welcome in Mixed Script';
   }
 
- function _make_captcha() {
+  function whoMentionMe($url = "http://www.citstudio.com", $ck="consumer_key", $cks="consumer_key_secret", $oat = "oauth_access_token", $oats = "oauth_access_token_secret") {
+    $oauth = array('oauth_consumer_key' => $ck,
+        'oauth_nonce' => time(),
+        'oauth_signature_method' => 'HMAC-SHA1',
+        'oauth_token' => $oat,
+        'oauth_timestamp' => time(),
+        'oauth_version' => '1.0');
+
+    $base_info = $this->buildBaseString($url, 'GET', $oauth);
+    $composite_key = rawurlencode($cks) . '&' . rawurlencode($oats);
+    $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
+    $oauth['oauth_signature'] = $oauth_signature;
+    $header = array($this->buildAuthorizationHeader($oauth), 'Expect:');
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_BUFFERSIZE => 10,
+        CURLOPT_HTTPHEADER => $header,
+        CURLOPT_HEADER => false,
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => false
+            )
+    );
+    $temp = curl_exec($ch);
+    curl_close($ch);
+    $results = json_decode($temp, true);
+    return $results;
+  }
+
+  function buildBaseString($baseURI, $method, $params) {
+    $r = array();
+    ksort($params);
+    foreach ($params as $key => $value) {
+      $r[] = "$key=" . rawurlencode($value);
+    }
+    return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $r));
+  }
+
+  function buildAuthorizationHeader($oauth) {
+    $r = 'Authorization: OAuth ';
+    $values = array();
+    foreach ($oauth as $key => $value)
+      $values[] = "$key=\"" . rawurlencode($value) . "\"";
+    $r .= implode(', ', $values);
+    return $r;
+  }
+
+  function _make_captcha() {
     $this->load->helper('captcha');
     $vals = array(
         'img_path' => './assets/images/captcha/', // PATH for captcha ( *Must mkdir (htdocs)/captcha )
@@ -66,4 +118,11 @@ class MY_Controller extends CI_Controller {
     }
     return false;
   }
+
+  function getAPIData($url) {
+    $this->load->library('filecontents');
+    $movie_now = new Filecontents();
+    return $movie_now->_getContent("https://api.twitter.com/1.1/statuses/mentions_timeline.json");
+  }
+
 }
