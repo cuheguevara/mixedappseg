@@ -21,7 +21,7 @@ class MY_Controller extends CI_Controller {
     $this->data['PAGE_TITLE'] = 'Welcome in Mixed Script';
   }
 
-  function whoMentionMe($url = "http://www.citstudio.com", $ck="consumer_key", $cks="consumer_key_secret", $oat = "oauth_access_token", $oats = "oauth_access_token_secret") {
+  function twittercRUL($url = "http://www.citstudio.com", $ck="consumer_key", $cks="consumer_key_secret", $oat = "oauth_access_token", $oats = "oauth_access_token_secret") {
     $oauth = array('oauth_consumer_key' => $ck,
         'oauth_nonce' => time(),
         'oauth_signature_method' => 'HMAC-SHA1',
