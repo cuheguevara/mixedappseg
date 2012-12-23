@@ -1,27 +1,27 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-if (!defined('BASEPATH'))
-  exit('No direct script access allowed');
-
-class Contact extends MY_Controller {
+class Contoh_captha_ci extends MY_Controller {
 
   public function __construct() {
     parent::__construct();
     $this->con = new Db_handler();
-    $this->data['view'] = 'homepages/';
+    $this->data['view'] = $this->data['controller'].'/';
     $this->data['name'] = '';
     $this->data['email'] = '';
     $this->data['pesan'] = '';
     $this->data['msg'] = '';
+    $this->data['MX_BREADCUMB'] = 'CAPTCHA CODEIGNITER';
   }
 
   public function index() {
     $this->data['captcha'] = $this->_make_captcha();
-    $this->data['view'] .= 'contact';
+    $this->data['view'] .= $this->data['method'];
     $this->parser->parse('templates/default', $this->data);
   }
 
-  public function send() {
+  public function sendcaptcha() {
+    $this->data['view'] .= 'index';
+    
     if ($this->input->server('REQUEST_METHOD') === 'POST') {
       $data = $this->input->post("input");
       $this->data['name'] = $data['name'];
@@ -29,7 +29,6 @@ class Contact extends MY_Controller {
       $this->data['pesan'] = $data['pesan'];
 
       $this->data['captcha'] = $this->_make_captcha();
-      $this->data['view'] .= 'contact';
 
       if ($this->_check_capthca()) {
         $this->con->DB_INSERT('ct_guestbook', array('name' => $data['name'], 'email' => $data['email'], 'msg' => $data['pesan']));
@@ -39,7 +38,6 @@ class Contact extends MY_Controller {
       }
     } else {
       $this->data['captcha'] = $this->_make_captcha();
-      $this->data['view'] .= 'contact';
     }
     $this->parser->parse('templates/default', $this->data);
   }

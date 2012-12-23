@@ -1,9 +1,6 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-if (!defined('BASEPATH'))
-  exit('No direct script access allowed');
-
-class Feed extends CI_Controller {
+class Contoh_rss_feed extends MY_Controller {
 
   function __construct() {
     parent::__construct();
@@ -21,7 +18,7 @@ class Feed extends CI_Controller {
     $data['creator_email'] = 'citstudio.bdg@gmail.com'; // your email  
     $data['posts'] = $this->posts->getPosts(10);
     header("Content-Type: application/rss+xml"); // important! 
-    $this->load->view('homepages/rss', $data);
+    $this->load->view($this->data['controller'].'/'.$this->data['method'], $data);
   }
 
 }

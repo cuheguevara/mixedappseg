@@ -4,11 +4,12 @@ class Home extends MY_Controller {
 
   public function __construct() {
     parent::__construct();
+    $this->data['MX_BREADCUMB'] = 'DASHBOARD';
     $this->data['view'] = 'homepages/';
   }
   
   public function index() {
-    $this->data['view'] .= 'view_home';
+    $this->data['view'] .= 'dashboard';
     $this->parser->parse( 'templates/default',$this->data);
   }
 

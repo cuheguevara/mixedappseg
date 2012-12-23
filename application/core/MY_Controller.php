@@ -7,6 +7,7 @@ class MY_Controller extends CI_Controller {
 
   public $error = array();
   public $data = array();
+  public $template = 'templates/default.php';
 
   public function __construct() {
     parent::__construct();
@@ -19,6 +20,39 @@ class MY_Controller extends CI_Controller {
     $this->language_id = $this->language == "indonesia" ? "id" : "en";
     $this->lang->load('site', $this->language);
     $this->data['PAGE_TITLE'] = 'Welcome in Mixed Script';
+    
+    $this->con = new Db_handler();
+    $this->data['menu_list'] = $this->con->DB_SELECT('mx_menu', 'equal', array('lang'=>$this->language_id));
+    
+    $this->data['controller'] = $this->router->fetch_class();
+    $this->data['method'] = $this->router->fetch_method();
+  }
+  
+  protected function render($data = null, $view = null, $partial = null) {
+    $data['controller'] = $this->data['controller'];
+    $data['method'] = $this->data['method'];
+
+    if ($partial != null) {
+      foreach ($partial as $key => $part) {
+        $data[$key] = $this->load->view($part, $data, true);
+      }
+    }
+    
+    if ($this->input->is_ajax_request()) $this->template = 'ajax';
+    
+    $url = $this->data['controller'] . '/' . $this->data['method'];
+    if ($view != null) {
+      $views = explode('/', $view);
+      if (sizeof($views) == 2) {
+        $url = $views[0] . '/' . $views[1];
+      } else {
+        $url = $this->data['controller'] . '/' . $view;
+      }
+    }
+    //render view
+    $data['view'] = $this->load->view($url, $data, true);
+    //render template
+    $this->load->view($this->template, $data);
   }
 
   function twittercRUL($url = "http://www.citstudio.com", $ck="consumer_key", $cks="consumer_key_secret", $oat = "oauth_access_token", $oats = "oauth_access_token_secret") {

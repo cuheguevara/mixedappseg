@@ -1,37 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Mixed Scripts</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/default.css" />
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <?php $this->load->view('templates/header') ?>
   <body>
-    <table align="center">
-      <tr>
-        <td>
-          <a href="<?= base_url('language/indonesia') ?>">Indonesia</a>
-        </td>
-        <td><a href="<?= base_url('language/english') ?>">English</a></td>
-      </tr>
-    </table>
-    <div id="container">
-      <div id="header">
-        <div id="title">
-          <h1>{PAGE_TITLE}</h1>
-        </div>
-        <div id="menu">
-          <?php $this->load->view('templates/menu'); ?>
-
-        </div>
-
+    <div id="header">
+      <h1><a href="#"><?php echo lang('site.title')?></a></h1>
+      <div class="userprofile">
+        <ul>
+          <li><a href="<?= base_url('language/english') ?>"><?php echo lang('site.english')?></a></li>
+        </ul>
       </div>
-
-      <div id="body">
-        <?php $this->load->view($view); ?>
+      <div class="userprofile">
+        <ul>
+          <li><a href="<?= base_url('language/indonesia') ?>"><?php echo lang('site.indonesia')?></a></li>
+        </ul>
       </div>
+    </div>			<!-- #header ends -->
+    <div class="clear"></div>
 
-      <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+    <div id="sidebar">
+      <?php $this->load->view('templates/sidebar') ?>
+    </div><!-- #sidebar ends -->
+
+    <div id="content">
+      <!-- <ul id="crumbs"><li><a href="#">Home</a></li><li><a href="#">Main section</a></li><li><a href="#">Sub section</a></li><li>The page you are on right now</li></ul>-->
+      <ul id="crumbs"><li>{MX_BREADCUMB}</li></ul>
+      <?php $this->load->view($view); ?>
     </div>
-
+    <?php $this->load->view('templates/footer'); ?>
   </body>
 </html>
