@@ -26,10 +26,6 @@
   <![endif]-->
 
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/highcharts.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/exporting.js"></script><!--FOR IMAGES-->
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/graph-data.js"></script>
-
   <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.3.2.js"></script>
  
 
